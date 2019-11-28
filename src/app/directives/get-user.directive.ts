@@ -16,12 +16,12 @@ interface GetUserDirectiveContext {
 }
 
 @Directive({
-  selector: '[appGetAuthor],[getUser]'
+  selector: '[appGetUser],[user]'
 })
 export class GetUserDirective implements OnChanges, OnDestroy {
 
   @Input()
-  getUserBy: number;
+  userIdentifiedBy: number;
 
   private context: GetUserDirectiveContext = {
     $implicit: null
@@ -38,7 +38,7 @@ export class GetUserDirective implements OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if ('getUserBy' in changes) {
+    if ('userIdentifiedBy' in changes) {
       this.applyChanges();
     }
   }
@@ -54,7 +54,7 @@ export class GetUserDirective implements OnChanges, OnDestroy {
   }
 
   private createSubscription() {
-    this.subscription = this.userService.getById(this.getUserBy)
+    this.subscription = this.userService.getById(this.userIdentifiedBy)
       .subscribe(author => {
         this.context.$implicit = author;
         this.createView();

@@ -4,7 +4,7 @@
     <h1>{{post.title}}</h1>
     <div class="post-links" >
       <a [routerLink]="[post.id]">More...</a>
-      <a [routerLink]="['/authored', author.id]" *getUser="let author by post.userId">
+      <a [routerLink]="['/authored', author.id]" *user="let author identifiedBy post.userId">
         {{author.name}}
       </a>
     </div>

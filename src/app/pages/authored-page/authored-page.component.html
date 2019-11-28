@@ -1,5 +1,5 @@
 <section class="dual-view">
-  <article *getUser="let author by (userId|async)">
+  <article *user="let author identifiedBy (userId|async)">
     <h1>{{author.name}}</h1>
     <p>Contact me: <a [href]="'mailto:'+author.email">{{author.email}}</a></p>
     <p>My personal page: <a [href]="author.website">{{author.website}}</a></p>
