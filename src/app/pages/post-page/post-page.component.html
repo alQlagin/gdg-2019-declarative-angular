@@ -2,8 +2,8 @@
   <h1>{{post.title}}</h1>
   <div>{{post.body}}</div>
   <div>
-    <a [routerLink]="['/authored', post.author.id]">
-      <small>Author {{post.author.name}}</small>
+    <a *getUser="let author by post.userId" [routerLink]="['/authored', author.id]">
+      <small>Author {{author.name}}</small>
     </a>
   </div>
 </ng-container>

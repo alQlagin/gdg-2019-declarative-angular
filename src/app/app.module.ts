@@ -7,13 +7,17 @@ import { PostPageComponent } from './pages/post-page/post-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AuthoredPageComponent } from './pages/authored-page/authored-page.component';
+import { GetUserDirective } from './directives/get-user.directive';
+import { GetPostsDirective } from './directives/get-posts.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     PostsPageComponent,
     PostPageComponent,
-    AuthoredPageComponent
+    AuthoredPageComponent,
+    GetUserDirective,
+    GetPostsDirective
   ],
   imports: [
     BrowserModule,

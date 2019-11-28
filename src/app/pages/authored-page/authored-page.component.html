@@ -1,11 +1,11 @@
 <section class="dual-view">
-  <article *ngIf="authorSubject|async as author">
+  <article *getUser="let author by (userId|async)">
     <h1>{{author.name}}</h1>
     <p>Contact me: <a [href]="'mailto:'+author.email">{{author.email}}</a></p>
     <p>My personal page: <a [href]="author.website">{{author.website}}</a></p>
   </article>
-  <div>
-    <article *ngFor="let post of (postsSubject|async)">
+  <div *getPosts="let posts of (userId|async) ">
+    <article *ngFor="let post of posts">
       <h2>{{post.title}}</h2>
       <div class="post-links">
         <a [routerLink]="['/posts',post.id]">More...</a>

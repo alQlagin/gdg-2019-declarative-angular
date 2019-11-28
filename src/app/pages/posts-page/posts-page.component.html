@@ -1,12 +1,12 @@
-<section>
+<section *getPosts="let posts">
   <h1>Posts</h1>
-  <article *ngFor="let post of (postsSubject|async)">
+  <article *ngFor="let post of posts">
     <h1>{{post.title}}</h1>
-    <div class="post-links">
-      <a [routerLink]="['/authored', post.author.id]">
-        {{post.author.name}}
-      </a>
+    <div class="post-links" >
       <a [routerLink]="[post.id]">More...</a>
+      <a [routerLink]="['/authored', author.id]" *getUser="let author by post.userId">
+        {{author.name}}
+      </a>
     </div>
   </article>
 </section>
