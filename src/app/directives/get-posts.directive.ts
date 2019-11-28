@@ -9,7 +9,7 @@ import {
   TemplateRef,
   ViewContainerRef
 } from '@angular/core';
-import { Post, PostsFetchOptions, PostsService } from '../services/posts.service';
+import { Post, PostsService } from '../services/posts.service';
 import { Subscription } from 'rxjs';
 
 interface GetPostsContext {
@@ -17,11 +17,11 @@ interface GetPostsContext {
 }
 
 @Directive({
-  selector: '[appGetPosts], [getPosts]'
+  selector: '[appGetPosts], [posts]'
 })
 export class GetPostsDirective implements OnChanges, OnDestroy, OnInit {
   @Input()
-  getPostsOf: number;
+  postsOf: number;
 
   context: GetPostsContext = {
     $implicit: []
@@ -37,7 +37,7 @@ export class GetPostsDirective implements OnChanges, OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.getPostsOf) {
+    if (!this.postsOf) {
       this.createSubscription();
     }
   }
@@ -48,7 +48,7 @@ export class GetPostsDirective implements OnChanges, OnDestroy, OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if ('getPostsOf' in changes) {
+    if ('postsOf' in changes) {
       this.applyChanges();
     }
   }
@@ -66,7 +66,7 @@ export class GetPostsDirective implements OnChanges, OnDestroy, OnInit {
   }
 
   private createSubscription() {
-    this.subscription = this.postsService.fetch({userId: this.getPostsOf})
+    this.subscription = this.postsService.fetch({userId: this.postsOf})
       .subscribe(posts => {
         this.context.$implicit = posts;
         this.createView();

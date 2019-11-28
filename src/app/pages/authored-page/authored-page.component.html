@@ -4,7 +4,7 @@
     <p>Contact me: <a [href]="'mailto:'+author.email">{{author.email}}</a></p>
     <p>My personal page: <a [href]="author.website">{{author.website}}</a></p>
   </article>
-  <div *getPosts="let posts of (userId|async) ">
+  <div *posts="let posts of (userId|async) ">
     <article *ngFor="let post of posts">
       <h2>{{post.title}}</h2>
       <div class="post-links">
