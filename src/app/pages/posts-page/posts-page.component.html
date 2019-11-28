@@ -1,0 +1,12 @@
+<section>
+  <h1>Posts</h1>
+  <article *ngFor="let post of (postsSubject|async)">
+    <h1>{{post.title}}</h1>
+    <div class="post-links">
+      <a [routerLink]="['/authored', post.author.id]">
+        {{post.author.name}}
+      </a>
+      <a [routerLink]="[post.id]">More...</a>
+    </div>
+  </article>
+</section>
