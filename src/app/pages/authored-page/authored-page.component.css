@@ -1,0 +1,7 @@
+.dual-view {
+  display: flex;
+  justify-content: stretch;
+}
+.dual-view > * {
+  flex-grow: 1;
+}

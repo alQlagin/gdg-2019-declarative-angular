@@ -1,0 +1,15 @@
+<section class="dual-view">
+  <article *ngIf="authorSubject|async as author">
+    <h1>{{author.name}}</h1>
+    <p>Contact me: <a [href]="'mailto:'+author.email">{{author.email}}</a></p>
+    <p>My personal page: <a [href]="author.website">{{author.website}}</a></p>
+  </article>
+  <div>
+    <article *ngFor="let post of (postsSubject|async)">
+      <h2>{{post.title}}</h2>
+      <div class="post-links">
+        <a [routerLink]="[post.id]">More...</a>
+      </div>
+    </article>
+  </div>
+</section>

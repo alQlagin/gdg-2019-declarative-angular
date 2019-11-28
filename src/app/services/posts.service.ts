@@ -15,13 +15,23 @@ export class PostsService {
   ) {
   }
 
-  fetch(): Observable<Post[]> {
-    return this.http.get<Post[]>(this.BASE_URL)
+  fetch(options: PostsFetchOptions = {}): Observable<Post[]> {
+    const params = {};
+    if (options.userId) {
+      params['userId'] = options.userId.toString();
+    }
+    return this.http.get<Post[]>(this.BASE_URL, {
+      params
+    })
   }
 
   getById(id: number): Observable<Post> {
     return this.http.get<Post>(`${this.BASE_URL}/${id}`)
   }
+}
+
+export interface PostsFetchOptions {
+  userId?: number
 }
 
 export interface Post {
