@@ -43,11 +43,6 @@ export class GetUserDirective implements OnChanges, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
-    this.disposeSubscription();
-    this.disposeViewRef();
-  }
-
   private applyChanges() {
     this.disposeSubscription();
     this.createSubscription();
@@ -72,6 +67,11 @@ export class GetUserDirective implements OnChanges, OnDestroy {
       this.subscription.unsubscribe();
       this.subscription = null;
     }
+  }
+
+  ngOnDestroy(): void {
+    this.disposeSubscription();
+    this.disposeViewRef();
   }
 
   private disposeViewRef() {
