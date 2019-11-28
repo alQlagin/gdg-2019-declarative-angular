@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { from, Observable } from 'rxjs';
-import { Post, PostsService, PostWithAuthor } from '../../services/posts.service';
-import { map, mergeMap, shareReplay, switchMap, toArray } from 'rxjs/operators';
-import { UserService } from '../../services/user.service';
+import { Observable } from 'rxjs';
+import { Post, PostsService } from '../../services/posts.service';
+import { map, shareReplay, switchMap } from 'rxjs/operators';
+import { User, UserService } from '../../services/user.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -11,14 +11,16 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./authored-page.component.css']
 })
 export class AuthoredPageComponent {
-  authorSubject = this.route.paramMap.pipe(
-    map(params => +params.get('userId')),
-    switchMap(userId => this.userService.getById(userId)),
-    shareReplay({bufferSize: 1, refCount: true})
+
+  userId = this.route.paramMap.pipe(
+    map(params => +params.get('userId'))
+  );
+  authorSubject = this.userId.pipe(
+    switchMap(userId => this.loadAuthor(userId))
   );
 
   postsSubject: Observable<Post[]> = this.authorSubject.pipe(
-    switchMap(author => this.postsService.fetch({userId: author.id}))
+    switchMap(author => this.loadPosts(author.id))
   );
 
   constructor(
@@ -28,4 +30,13 @@ export class AuthoredPageComponent {
   ) {
   }
 
+  loadAuthor(userId: number): Observable<User> {
+    return this.userService.getById(userId).pipe(
+      shareReplay({bufferSize: 1, refCount: true})
+    )
+  }
+
+  loadPosts(userId) {
+    return this.postsService.fetch({userId: userId.id})
+  }
 }

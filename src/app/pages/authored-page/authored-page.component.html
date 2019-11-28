@@ -8,7 +8,7 @@
     <article *ngFor="let post of (postsSubject|async)">
       <h2>{{post.title}}</h2>
       <div class="post-links">
-        <a [routerLink]="[post.id]">More...</a>
+        <a [routerLink]="['/posts',post.id]">More...</a>
       </div>
     </article>
   </div>

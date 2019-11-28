@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./post-page.component.css']
 })
 export class PostPageComponent {
+
   postSubject = this.route.paramMap.pipe(
     switchMap(params => this.loadPost(+params.get('post'))),
   );
@@ -31,7 +32,8 @@ export class PostPageComponent {
   loadAuthor(post: Post): Observable<PostWithAuthor> {
     return this.usersService.getById(post.userId).pipe(
       map((author) => ({
-        ...post, author
+        ...post,
+        author
       }))
     )
   }

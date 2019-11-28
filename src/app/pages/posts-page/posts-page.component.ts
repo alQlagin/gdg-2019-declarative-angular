@@ -11,7 +11,7 @@ import { from, Observable } from 'rxjs';
 })
 export class PostsPageComponent {
 
-  postsSubject: Observable<PostWithAuthor[]> = this.postsService.fetch().pipe(
+  postsSubject = this.postsService.fetch().pipe(
     switchMap(posts => this.loadAuthors(posts))
   );
 
