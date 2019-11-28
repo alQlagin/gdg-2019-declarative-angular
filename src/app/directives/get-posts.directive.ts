@@ -75,7 +75,10 @@ export class GetPostsDirective implements OnChanges, OnDestroy, OnInit {
 
   private createView() {
     if (!this.viewRef) {
-      this.viewRef = this.vcr.createEmbeddedView(this.templateRef, this.context);
+      this.viewRef = this.vcr.createEmbeddedView(
+        this.templateRef,
+        this.context
+      );
     }
   }
 

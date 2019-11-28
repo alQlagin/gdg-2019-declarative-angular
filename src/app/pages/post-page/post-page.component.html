@@ -2,7 +2,8 @@
   <h1>{{post.title}}</h1>
   <div>{{post.body}}</div>
   <div>
-    <a *user="let author identifiedBy post.userId" [routerLink]="['/authored', author.id]">
+    <a *user="let author identifiedBy post.userId"
+       [routerLink]="['/authored', author.id]">
       <small>Author {{author.name}}</small>
     </a>
   </div>
