@@ -2,9 +2,9 @@
   <h1>{{post.title}}</h1>
   <div>{{post.body}}</div>
   <div>
-    <a *user="let author identifiedBy post.userId"
-       [routerLink]="['/authored', author.id]">
+    <app-authored-link *user="let author identifiedBy post.userId"
+                       [author]="author">
       <small>Author {{author.name}}</small>
-    </a>
+    </app-authored-link>
   </div>
 </ng-container>

@@ -1,15 +1,11 @@
-<section class="dual-view">
-  <article *user="let author identifiedBy (userId|async)">
-    <h1>{{author.name}}</h1>
-    <p>Contact me: <a [href]="'mailto:'+author.email">{{author.email}}</a></p>
-    <p>My personal page: <a [href]="author.website">{{author.website}}</a></p>
-  </article>
-  <div *posts="let posts of (userId|async) ">
-    <article *ngFor="let post of posts">
-      <h2>{{post.title}}</h2>
-      <div class="post-links">
-        <a [routerLink]="['/posts',post.id]">More...</a>
-      </div>
-    </article>
-  </div>
-</section>
+<app-dual-view>
+  <app-user-info
+    *user="let author identifiedBy (userId|async)"
+    [data]="author"
+  ></app-user-info>
+  <app-post-list *posts="let posts of (userId|async) ">
+    <app-post-preview *ngFor="let post of posts" [post]="post">
+      <app-post-details-link [post]="post">More...</app-post-details-link>
+    </app-post-preview>
+  </app-post-list>
+</app-dual-view>

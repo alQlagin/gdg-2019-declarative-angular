@@ -19,7 +19,7 @@ export class PostPageComponent {
   constructor(
     private route: ActivatedRoute,
     private postsService: PostsService,
-    private usersService: UserService,
+    private userService: UserService,
   ) {
   }
 
@@ -30,8 +30,8 @@ export class PostPageComponent {
   }
 
   loadAuthor(post: Post): Observable<PostWithAuthor> {
-    return this.usersService.getById(post.userId).pipe(
-      map((author) => ({
+    return this.userService.getById(post.userId).pipe(
+      map(author => ({
         ...post,
         author
       }))
